@@ -8,7 +8,7 @@ import Login from './pages/Login';
 function App() {
   return (
     <Switch>
-      <Route exact path="/" component={ Login } />
+      <Route exact path="/" render={ (props) => <Login { ...props } /> } />
       {/* Rotas abaixo ainda serão implementadas, só um esqueleto */}
       <Route path="/foods" />
       <Route path="/drinks" />
