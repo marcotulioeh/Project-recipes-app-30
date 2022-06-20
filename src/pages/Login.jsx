@@ -12,7 +12,21 @@ class Login extends React.Component {
 
   handleInputsChange = ({ target }) => {
     const { id, value } = target;
-    this.setState({ [id]: value });
+    this.setState(
+      () => ({ [id]: value }),
+      this.validadeInputsToEnableButton,
+    );
+  }
+
+  validadeInputsToEnableButton = () => {
+    const { loginEmail, loginPassword } = this.state;
+    const minimumLengthPassword = 5;
+    const emailValidation = /\S+@\S+\.\S+/;
+    // console.log(emailValidation.test(loginEmail));
+    // console.log(loginPassword.length > minimumLengthPassword);
+    const shouldButtonBeEnabled = emailValidation.test(loginEmail)
+      && loginPassword.length > minimumLengthPassword;
+    this.setState({ isButtonDisabled: !shouldButtonBeEnabled });
   }
 
   render() {
