@@ -1,4 +1,9 @@
 import React from 'react';
+import propTypes from 'prop-types';
+import {
+  saveTokensToLocalStorage,
+  saveUserEmailToLocalStorage,
+} from '../helpers/loginLocalStorage';
 
 class Login extends React.Component {
   constructor() {
@@ -16,6 +21,14 @@ class Login extends React.Component {
       () => ({ [id]: value }),
       this.validadeInputsToEnableButton,
     );
+  }
+
+  submitButton = () => {
+    const { loginEmail } = this.state;
+    const { history } = this.props;
+    saveTokensToLocalStorage();
+    saveUserEmailToLocalStorage(loginEmail);
+    history.push('/foods');
   }
 
   validadeInputsToEnableButton = () => {
@@ -56,6 +69,7 @@ class Login extends React.Component {
           type="button"
           data-testid="login-submit-btn"
           disabled={ isButtonDisabled }
+          onClick={ this.submitButton }
         >
           Enter
         </button>
@@ -63,5 +77,9 @@ class Login extends React.Component {
     );
   }
 }
+
+Login.propTypes = {
+  history: propTypes.shape().isRequired,
+};
 
 export default Login;
