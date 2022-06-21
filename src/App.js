@@ -5,6 +5,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './pages/Login';
 import Explore from './pages/Explore';
+import ExploreFoodsOrDrinks from './pages/ExploreFoodsOrDrinks';
 
 function App() {
   return (
@@ -17,8 +18,14 @@ function App() {
       <Route path="/drinks/:id-da-receita" />
       <Route path="/foods/:id-da-receita/in-progress" />
       <Route path="/drinks/:id-da-receita/in-progress" />
-      <Route path="/explore/foods" />
-      <Route path="/explore/drinks" />
+      <Route
+        path="/explore/foods"
+        render={ (props) => <ExploreFoodsOrDrinks { ...props } /> }
+      />
+      <Route
+        path="/explore/drinks"
+        render={ (props) => <ExploreFoodsOrDrinks { ...props } /> }
+      />
       <Route path="/explore/foods/ingredients" />
       <Route path="/explore/drinks/ingredients" />
       <Route path="/explore/foods/nationalities" />
