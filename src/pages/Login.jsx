@@ -17,11 +17,10 @@ function Login() {
     const shouldButtonBeEnabled = emailValidation.test(userEmail)
       && userPassword.length > minimumLengthPassword;
 
-    setButtonCondition(shouldButtonBeEnabled);
+    setButtonCondition(!shouldButtonBeEnabled);
   }, [userEmail, userPassword, setButtonCondition]);
 
   const submitButton = () => {
-    // console.log('CLIQUEI');
     saveTokensToLocalStorage();
     saveUserEmailToLocalStorage(userEmail);
     history.push('/foods');
