@@ -4,6 +4,7 @@ import './App.css';
 // import rockGlass from './images/rockGlass.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './pages/Login';
+import Explore from './pages/Explore';
 
 function App() {
   return (
@@ -16,12 +17,12 @@ function App() {
       <Route path="/drinks/:id-da-receita" />
       <Route path="/foods/:id-da-receita/in-progress" />
       <Route path="/drinks/:id-da-receita/in-progress" />
-      <Route path="/explore" />
       <Route path="/explore/foods" />
       <Route path="/explore/drinks" />
       <Route path="/explore/foods/ingredients" />
       <Route path="/explore/drinks/ingredients" />
       <Route path="/explore/foods/nationalities" />
+      <Route path="/explore" render={ (props) => <Explore { ...props } /> } />
       <Route path="/profile" />
       <Route path="/done-recipes" />
       <Route path="/favorite-recipes" />
