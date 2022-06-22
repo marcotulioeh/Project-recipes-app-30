@@ -8,18 +8,6 @@ import Mainpage from './pages/Mainpage';
 
 function App() {
   return (
-<<<<<<< HEAD
-    <div className="meals">
-      <span className="logo">TRYBE </span>
-      <object
-        className="rocksGlass"
-        type="image/svg+xml"
-        data={ rockGlass }
-      >
-        Glass
-      </object>
-    </div>
-=======
     <Switch>
       <Route exact path="/" component={ Login } />
       {/* Rotas abaixo ainda serão implementadas, só um esqueleto */}
@@ -39,7 +27,6 @@ function App() {
       <Route path="/done-recipes" />
       <Route path="/favorite-recipes" />
     </Switch>
->>>>>>> main-group-12
   );
 }
 
