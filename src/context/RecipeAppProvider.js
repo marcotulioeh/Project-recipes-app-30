@@ -8,6 +8,10 @@ function RecipeAppProvider({ children }) {
   const [drinkRecipes, setDrinkRecipes] = useState([]);
   const [filteredMeals, setFilteredMeals] = useState([]);
   const [filteredDrinks, setFilteredDrinks] = useState([]);
+  const [mealCategories, setMealCategories] = useState([]);
+  const [drinkCategories, setDrinkCategories] = useState([]);
+  const [mealCategoryFilters, setMealCategoryFilters] = useState();
+  const [drinkCategoryFilters, setDrinkCategoryFilters] = useState();
 
   const RECIPE_CONTEXT = {
     foods: {
@@ -17,6 +21,10 @@ function RecipeAppProvider({ children }) {
     drinks: {
       drinkRecipes,
       filteredDrinks,
+    },
+    categories: {
+      mealCategoryFilters,
+      drinkCategoryFilters,
     },
   };
 
@@ -31,12 +39,29 @@ function RecipeAppProvider({ children }) {
     }
   }, [mealRecipes, drinkRecipes]);
 
+  // para filtrar as categorias q vem da API~
+  useEffect(() => {
+    const filterNumber = 5;
+    if (mealCategories.length !== 0 && drinkCategories.length !== 0) {
+      const mealCatFilters = mealCategories.meals
+        .filter((_elemento, index) => index < filterNumber);
+      const drinkCatFilters = drinkCategories.drinks
+        .filter((_elemento, index) => index < filterNumber);
+      setMealCategoryFilters(mealCatFilters);
+      setDrinkCategoryFilters(drinkCatFilters);
+    }
+  }, [mealCategories, drinkCategories]);
+
   useEffect(() => {
     const saveRecipesFromAPI = async () => {
       const mealRecipesFromAPI = await retrieveRecipeAPIData('https://www.themealdb.com/api/json/v1/1/search.php?s=');
       const drinkRecipesFromAPI = await retrieveRecipeAPIData('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+      const mealCategoriesFromAPI = await retrieveRecipeAPIData('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
+      const drinkCategoriesFromAPI = await retrieveRecipeAPIData('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
       setMealRecipes(mealRecipesFromAPI);
       setDrinkRecipes(drinkRecipesFromAPI);
+      setMealCategories(mealCategoriesFromAPI);
+      setDrinkCategories(drinkCategoriesFromAPI);
     };
     saveRecipesFromAPI();
   }, []);
