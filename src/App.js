@@ -4,6 +4,7 @@ import './App.css';
 // import rockGlass from './images/rockGlass.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './pages/Login';
+import Profile from './pages/Profile';
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
       <Route path="/explore/foods/ingredients" />
       <Route path="/explore/drinks/ingredients" />
       <Route path="/explore/foods/nationalities" />
-      <Route path="/profile" />
+      <Route path="/profile" component={ Profile } />
       <Route path="/done-recipes" />
       <Route path="/favorite-recipes" />
     </Switch>
