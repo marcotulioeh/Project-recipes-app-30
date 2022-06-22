@@ -1,18 +1,39 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import RecipeAppContext from '../context/RecipeAppContext';
+import RecipeCard from '../components/RecipeCard';
 
 function Mainpage() {
   const {
-    foods: { mealRecipes }, drinks: { drinkRecipes },
+    foods: { filteredMeals }, drinks: { filteredDrinks },
   } = useContext(RecipeAppContext);
 
-  console.log('mealRecipes', mealRecipes);
-  console.log('drinkRecipes', drinkRecipes);
   const history = useHistory();
 
-  console.log(history.location.pathname);
-  return (<div>mainpage</div>);
+  return (
+    <div>
+      { history.location.pathname === '/foods' && (
+        <div>
+          { filteredMeals.length !== 0 && filteredMeals
+            .map(({ strMealThumb, strMeal }, index) => (
+              <RecipeCard
+                props={ { image: strMealThumb, name: strMeal } }
+                key={ index }
+              />))}
+        </div>
+      ) }
+      { history.location.pathname === '/drinks' && (
+        <div>
+          { filteredDrinks.length !== 0 && filteredDrinks
+            .map(({ strDrinkThumb, strDrink }, index) => (
+              <RecipeCard
+                props={ { image: strDrinkThumb, name: strDrink } }
+                key={ index }
+              />))}
+        </div>
+      ) }
+    </div>
+  );
   // requisito 25 em diante~
 }
 
