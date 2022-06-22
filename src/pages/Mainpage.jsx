@@ -12,6 +12,9 @@ function Mainpage() {
       mealCategoryFilters,
       drinkCategoryFilters,
     },
+    filtering: {
+      setCurrentFilter,
+    },
   } = useContext(RecipeAppContext);
 
   const history = useHistory();
@@ -36,6 +39,13 @@ function Mainpage() {
                 props={ { categoryName: drinkCategory.strCategory } }
               />)))}
         </section>)}
+      <button
+        type="button"
+        data-testid="All-category-filter"
+        onClick={ () => setCurrentFilter('') }
+      >
+        All
+      </button>
       { history.location.pathname === '/foods' && (
         <div>
           { filteredMeals.length !== 0 && filteredMeals
