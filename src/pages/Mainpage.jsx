@@ -17,6 +17,7 @@ function Mainpage() {
     },
   } = useContext(RecipeAppContext);
 
+  // jdasijd
   const history = useHistory();
 
   return (
@@ -49,9 +50,10 @@ function Mainpage() {
       { history.location.pathname === '/foods' && (
         <div>
           { filteredMeals.length !== 0 && filteredMeals
-            .map(({ strMealThumb, strMeal }, index) => (
+            .map(({ strMealThumb, strMeal, idMeal }, index) => (
               <RecipeCard
-                props={ { image: strMealThumb, name: strMeal, index } }
+                props={ {
+                  image: strMealThumb, name: strMeal, index, id: idMeal, page: 'foods' } }
                 key={ index }
               />))}
         </div>
@@ -59,9 +61,14 @@ function Mainpage() {
       { history.location.pathname === '/drinks' && (
         <div>
           { filteredDrinks.length !== 0 && filteredDrinks
-            .map(({ strDrinkThumb, strDrink }, index) => (
+            .map(({ strDrinkThumb, strDrink, idDrink }, index) => (
               <RecipeCard
-                props={ { image: strDrinkThumb, name: strDrink, index } }
+                props={ {
+                  image: strDrinkThumb,
+                  name: strDrink,
+                  index,
+                  id: idDrink,
+                  page: 'drinks' } }
                 key={ index }
               />))}
         </div>
