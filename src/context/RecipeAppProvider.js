@@ -6,15 +6,30 @@ import retrieveRecipeAPIData from '../helpers/RecipesAPI';
 function RecipeAppProvider({ children }) {
   const [mealRecipes, setMealRecipes] = useState([]);
   const [drinkRecipes, setDrinkRecipes] = useState([]);
+  const [filteredMeals, setFilteredMeals] = useState([]);
+  const [filteredDrinks, setFilteredDrinks] = useState([]);
 
   const RECIPE_CONTEXT = {
     foods: {
       mealRecipes,
+      filteredMeals,
     },
     drinks: {
       drinkRecipes,
+      filteredDrinks,
     },
   };
+
+  // para filtrar pela search bar & mandar somente 12~
+  useEffect(() => {
+    const recipesToShow = 12;
+    if (mealRecipes.length !== 0 && drinkRecipes.length !== 0) {
+      setFilteredMeals(mealRecipes.meals
+        .filter((_elemento, index) => index < recipesToShow));
+      setFilteredDrinks(drinkRecipes.drinks
+        .filter((_elemento, index) => index < recipesToShow));
+    }
+  }, [mealRecipes, drinkRecipes]);
 
   useEffect(() => {
     const saveRecipesFromAPI = async () => {
