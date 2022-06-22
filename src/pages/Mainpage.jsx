@@ -2,16 +2,40 @@ import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import RecipeAppContext from '../context/RecipeAppContext';
 import RecipeCard from '../components/RecipeCard';
+import CategoryButton from '../components/CategoryButton';
 
 function Mainpage() {
   const {
-    foods: { filteredMeals }, drinks: { filteredDrinks },
+    foods: { filteredMeals },
+    drinks: { filteredDrinks },
+    categories: {
+      mealCategoryFilters,
+      drinkCategoryFilters,
+    },
   } = useContext(RecipeAppContext);
 
   const history = useHistory();
 
   return (
-    <div>
+    <>
+      { mealCategoryFilters.length !== 0 && (
+        <section>
+          { history.location.pathname === '/foods' && (mealCategoryFilters
+            .map((mealCategory, index) => (
+              <CategoryButton
+                key={ index }
+                props={ { categoryName: mealCategory.strCategory } }
+              />)))}
+        </section>)}
+      { drinkCategoryFilters.length !== 0 && (
+        <section>
+          { history.location.pathname === '/drinks' && (drinkCategoryFilters
+            .map((drinkCategory, index) => (
+              <CategoryButton
+                key={ index }
+                props={ { categoryName: drinkCategory.strCategory } }
+              />)))}
+        </section>)}
       { history.location.pathname === '/foods' && (
         <div>
           { filteredMeals.length !== 0 && filteredMeals
@@ -32,7 +56,7 @@ function Mainpage() {
               />))}
         </div>
       ) }
-    </div>
+    </>
   );
   // requisito 25 em diante~
 }
