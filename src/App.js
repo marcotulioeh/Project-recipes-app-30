@@ -4,14 +4,15 @@ import './App.css';
 // import rockGlass from './images/rockGlass.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './pages/Login';
+import Mainpage from './pages/Mainpage';
 
 function App() {
   return (
     <Switch>
       <Route exact path="/" component={ Login } />
       {/* Rotas abaixo ainda serão implementadas, só um esqueleto */}
-      <Route path="/foods" />
-      <Route path="/drinks" />
+      <Route path="/foods" component={ Mainpage } />
+      <Route path="/drinks" component={ Mainpage } />
       <Route path="/foods/:id-da-receita" />
       <Route path="/drinks/:id-da-receita" />
       <Route path="/foods/:id-da-receita/in-progress" />
