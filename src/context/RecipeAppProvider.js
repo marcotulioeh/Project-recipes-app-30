@@ -10,16 +10,15 @@ function RecipeAppProvider({ children }) {
   const [filteredDrinks, setFilteredDrinks] = useState([]);
   const [mealCategories, setMealCategories] = useState([]);
   const [drinkCategories, setDrinkCategories] = useState([]);
-  const [mealCategoryFilters, setMealCategoryFilters] = useState();
-  const [drinkCategoryFilters, setDrinkCategoryFilters] = useState();
+  const [mealCategoryFilters, setMealCategoryFilters] = useState([]);
+  const [drinkCategoryFilters, setDrinkCategoryFilters] = useState([]);
+  // const [currentFilter, setCurrentFilter] = useState([]);
 
   const RECIPE_CONTEXT = {
     foods: {
-      mealRecipes,
       filteredMeals,
     },
     drinks: {
-      drinkRecipes,
       filteredDrinks,
     },
     categories: {
