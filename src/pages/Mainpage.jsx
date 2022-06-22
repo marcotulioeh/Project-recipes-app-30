@@ -17,7 +17,7 @@ function Mainpage() {
           { filteredMeals.length !== 0 && filteredMeals
             .map(({ strMealThumb, strMeal }, index) => (
               <RecipeCard
-                props={ { image: strMealThumb, name: strMeal } }
+                props={ { image: strMealThumb, name: strMeal, index } }
                 key={ index }
               />))}
         </div>
@@ -27,7 +27,7 @@ function Mainpage() {
           { filteredDrinks.length !== 0 && filteredDrinks
             .map(({ strDrinkThumb, strDrink }, index) => (
               <RecipeCard
-                props={ { image: strDrinkThumb, name: strDrink } }
+                props={ { image: strDrinkThumb, name: strDrink, index } }
                 key={ index }
               />))}
         </div>
