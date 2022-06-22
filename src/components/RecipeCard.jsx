@@ -1,12 +1,18 @@
 import React from 'react';
 // import { propTypes } from 'react-bootstrap/esm/Image';
+import { useHistory } from 'react-router-dom';
 import propTypes from 'prop-types';
 import '../style/RecipeCard.css';
 
 function RecipeCard(props) {
-  const { props: { image, name, index } } = props;
+  const { props: { image, name, index, id, page } } = props;
+  const history = useHistory();
   return (
-    <div data-testid={ `${index}-recipe-card` }>
+    <button
+      type="button"
+      data-testid={ `${index}-recipe-card` }
+      onClick={ () => history.push(`/${page}/${id}`) }
+    >
       <img
         data-testid={ `${index}-card-img` }
         className="recipe-card-image"
@@ -14,7 +20,7 @@ function RecipeCard(props) {
         alt={ name }
       />
       <h4 data-testid={ `${index}-card-name` }>{ name }</h4>
-    </div>
+    </button>
   );
 }
 
