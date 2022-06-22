@@ -24,6 +24,7 @@ function RecipeCard(props) {
   );
 }
 
+// propt
 RecipeCard.propTypes = {
   props: propTypes.shape().isRequired,
 };
