@@ -12,7 +12,9 @@ function RecipeAppProvider({ children }) {
   const [drinkCategories, setDrinkCategories] = useState([]);
   const [mealCategoryFilters, setMealCategoryFilters] = useState([]);
   const [drinkCategoryFilters, setDrinkCategoryFilters] = useState([]);
-  // const [currentFilter, setCurrentFilter] = useState([]);
+  const [currentFilter, setCurrentFilter] = useState('');
+  const [mealByCategory, setMealByCategory] = useState([]);
+  const [drinksByCategory, setDrinksByCategory] = useState([]);
 
   const RECIPE_CONTEXT = {
     foods: {
@@ -25,18 +27,57 @@ function RecipeAppProvider({ children }) {
       mealCategoryFilters,
       drinkCategoryFilters,
     },
+    filtering: {
+      currentFilter,
+      setCurrentFilter,
+    },
+    mealByCategory,
+    drinksByCategory,
+    setDrinksByCategory,
   };
 
-  // para filtrar pela search bar & mandar somente 12~
+  // para filtrar por category & mandar somente 12~
   useEffect(() => {
     const recipesToShow = 12;
-    if (mealRecipes.length !== 0 && drinkRecipes.length !== 0) {
+    if (mealRecipes.length !== 0 && drinkRecipes.length !== 0 && currentFilter === '') {
       setFilteredMeals(mealRecipes.meals
-        .filter((_elemento, index) => index < recipesToShow));
+        .filter((_element, index) => index < recipesToShow));
       setFilteredDrinks(drinkRecipes.drinks
-        .filter((_elemento, index) => index < recipesToShow));
+        .filter((_element, index) => index < recipesToShow));
     }
-  }, [mealRecipes, drinkRecipes]);
+    if (currentFilter !== '' && mealByCategory.length !== 0) {
+      setFilteredMeals(mealByCategory
+        .filter((_element, index) => index < recipesToShow));
+    }
+    if (currentFilter !== '' && drinksByCategory.length !== 0) {
+      setFilteredDrinks(drinksByCategory
+        .filter((_element, index) => index < recipesToShow));
+    }
+  }, [mealRecipes, drinkRecipes, currentFilter, mealByCategory, drinksByCategory]);
+
+  useEffect(() => {
+    if (currentFilter !== '') {
+      const retrieveRecipesFilteredByCategoriesFromAPI = async () => {
+        if (currentFilter !== '' && mealCategoryFilters
+          .some(({ strCategory }) => strCategory === currentFilter)) {
+          const mealsFilteredByCategory = await
+          retrieveRecipeAPIData(
+            `https://www.themealdb.com/api/json/v1/1/filter.php?c=${currentFilter}`,
+          );
+          setMealByCategory(mealsFilteredByCategory.meals);
+        }
+        if (currentFilter !== '' && drinkCategoryFilters
+          .some(({ strCategory }) => strCategory === currentFilter)) {
+          const drinksFilteredByCategory = await
+          retrieveRecipeAPIData(
+            `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${currentFilter}`,
+          );
+          setDrinksByCategory(drinksFilteredByCategory.drinks);
+        }
+      };
+      retrieveRecipesFilteredByCategoriesFromAPI();
+    }
+  }, [currentFilter, mealCategoryFilters, drinkCategoryFilters]);
 
   // para filtrar as categorias q vem da API~
   useEffect(() => {
@@ -51,6 +92,7 @@ function RecipeAppProvider({ children }) {
     }
   }, [mealCategories, drinkCategories]);
 
+  // useEffect p/ chamadas de API iniciais
   useEffect(() => {
     const saveRecipesFromAPI = async () => {
       const mealRecipesFromAPI = await retrieveRecipeAPIData('https://www.themealdb.com/api/json/v1/1/search.php?s=');
