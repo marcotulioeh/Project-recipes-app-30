@@ -31,9 +31,6 @@ function RecipeAppProvider({ children }) {
       currentFilter,
       setCurrentFilter,
     },
-    mealByCategory,
-    drinksByCategory,
-    setDrinksByCategory,
   };
 
   // para filtrar por category & mandar somente 12~
