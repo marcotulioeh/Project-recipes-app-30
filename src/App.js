@@ -6,14 +6,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './pages/Login';
 import Explore from './pages/Explore';
 import ExploreFoodsOrDrinks from './pages/ExploreFoodsOrDrinks';
+import Profile from './pages/Profile';
+import Mainpage from './pages/Mainpage';
 
 function App() {
   return (
     <Switch>
-      <Route exact path="/" render={ (props) => <Login { ...props } /> } />
+      <Route exact path="/" component={ Login } />
       {/* Rotas abaixo ainda serão implementadas, só um esqueleto */}
-      <Route path="/foods" />
-      <Route path="/drinks" />
+      <Route path="/foods" component={ Mainpage } />
+      <Route path="/drinks" component={ Mainpage } />
       <Route path="/foods/:id-da-receita" />
       <Route path="/drinks/:id-da-receita" />
       <Route path="/foods/:id-da-receita/in-progress" />
@@ -31,6 +33,7 @@ function App() {
       <Route path="/explore/foods/nationalities" />
       <Route path="/explore" render={ (props) => <Explore { ...props } /> } />
       <Route path="/profile" />
+      <Route path="/profile" component={ Profile } />
       <Route path="/done-recipes" />
       <Route path="/favorite-recipes" />
     </Switch>
