@@ -1,16 +1,31 @@
-import React, { useState, useContext } from 'react';
+import { string } from 'prop-types';
+import React, { useState, useContext, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import RecipeAppContext from '../context/RecipeAppContext';
 
 function SearchBar() {
-  const { searching: { setSearchFilters } } = useContext(RecipeAppContext);
+  const { searching: { setSearchFilters, searchResult } } = useContext(RecipeAppContext);
   const [filterType, setFilterType] = useState('');
   const [filterString, setFilterString] = useState('');
+  const history = useHistory();
 
   const sendSearchFiltersToContext = () => {
-    console.log('cliquei');
-    const newSearchFilters = { type: filterType, string: filterString };
+    const newSearchFilters = {
+      type: filterType,
+      string: filterString,
+      recipeType: history.location.pathname,
+    };
     setSearchFilters(newSearchFilters);
+    if (newSearchFilters.type === 'First letter' && string.length > 1) {
+      global.alert('Your search must have only 1 (one) character');
+    }
   };
+
+  useEffect(() => {
+    if (searchResult.recipes === null) {
+      global.alert('Sorry, we haven\'t found any recipes for these filters.');
+    }
+  }, [searchResult]);
 
   const handleRadioButtonsChange = ({ target }) => {
     if (target.checked) {
