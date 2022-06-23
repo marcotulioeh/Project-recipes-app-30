@@ -16,7 +16,7 @@ function RecipeAppProvider({ children }) {
   const [mealByCategory, setMealByCategory] = useState([]);
   const [drinksByCategory, setDrinksByCategory] = useState([]);
   const [searchFilters, setSearchFilters] = useState({});
-  const [searchResult, setSearchResult] = useState([]);
+  const [searchResult, setSearchResult] = useState({ type: '', recipes: [] });
 
   const RECIPE_CONTEXT = {
     foods: {
@@ -44,8 +44,32 @@ function RecipeAppProvider({ children }) {
   };
 
   useEffect(() => {
-    console.log('coisei');
-  }, []);
+    const getSearchDataFromAPI = async () => {
+      const URLFirstSection = searchFilters.recipeType === '/foods' ? 'https://www.themealdb' : 'https://www.thecocktaildb';
+      const type = searchFilters.recipeType === '/foods' ? 'meals' : 'drinks';
+      let URLSecondSection;
+      switch (searchFilters.type) {
+      case 'Ingredient':
+        URLSecondSection = '.com/api/json/v1/1/filter.php?i=';
+        break;
+      case 'Name':
+        URLSecondSection = '.com/api/json/v1/1/search.php?s=';
+        break;
+      case 'First letter':
+        URLSecondSection = '.com/api/json/v1/1/search.php?f=';
+        break;
+      default:
+        break;
+      }
+      const URLToSearch = `${URLFirstSection}${URLSecondSection}${searchFilters.string}`;
+      const APISearchResult = await retrieveRecipeAPIData(URLToSearch);
+      // console.log(APISearchResult);
+      setSearchResult({ type: searchFilters.recipeType, recipes: APISearchResult[type] });
+    };
+    if (searchFilters.type) {
+      getSearchDataFromAPI();
+    }
+  }, [searchFilters]);
 
   // para filtrar por category & mandar somente 12~
   useEffect(() => {
@@ -64,7 +88,24 @@ function RecipeAppProvider({ children }) {
       setFilteredDrinks(drinksByCategory
         .filter((_element, index) => index < recipesToShow));
     }
-  }, [mealRecipes, drinkRecipes, currentFilter, mealByCategory, drinksByCategory]);
+    if (searchResult.recipes
+      && searchResult.recipes.length !== 0 && searchResult.type === '/foods') {
+      setFilteredMeals(searchResult.recipes
+        .filter((_element, index) => index < recipesToShow));
+      // console.log(searchResult);
+    }
+    if (searchResult.recipes
+      && searchResult.recipes.length !== 0 && searchResult.type === '/drinks') {
+      setFilteredDrinks(searchResult.recipes
+        .filter((_element, index) => index < recipesToShow));
+    }
+  }, [mealRecipes,
+    drinkRecipes,
+    currentFilter,
+    mealByCategory,
+    drinksByCategory,
+    searchResult,
+  ]);
 
   useEffect(() => {
     if (currentFilter !== '') {
