@@ -3,6 +3,8 @@ import { useHistory } from 'react-router-dom';
 import RecipeAppContext from '../context/RecipeAppContext';
 import RecipeCard from '../components/RecipeCard';
 import CategoryButton from '../components/CategoryButton';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 function Mainpage() {
   const {
@@ -22,6 +24,7 @@ function Mainpage() {
 
   return (
     <>
+      <Header title="Tela Principal" />
       { mealCategoryFilters.length !== 0 && (
         <section>
           { history.location.pathname === '/foods' && (mealCategoryFilters
@@ -73,6 +76,7 @@ function Mainpage() {
               />))}
         </div>
       ) }
+      <Footer />
     </>
   );
   // requisito 25 em diante~
