@@ -15,6 +15,8 @@ function RecipeAppProvider({ children }) {
   const [currentFilter, setCurrentFilter] = useState('');
   const [mealByCategory, setMealByCategory] = useState([]);
   const [drinksByCategory, setDrinksByCategory] = useState([]);
+  const [searchFilters, setSearchFilters] = useState({});
+  const [searchResult, setSearchResult] = useState([]);
 
   const RECIPE_CONTEXT = {
     foods: {
@@ -31,7 +33,19 @@ function RecipeAppProvider({ children }) {
       currentFilter,
       setCurrentFilter,
     },
+    searching: {
+      setSearchFilters,
+      searchResult,
+    },
+    a: {
+      searchFilters,
+      setSearchResult,
+    },
   };
+
+  useEffect(() => {
+    console.log('coisei');
+  }, []);
 
   // para filtrar por category & mandar somente 12~
   useEffect(() => {
