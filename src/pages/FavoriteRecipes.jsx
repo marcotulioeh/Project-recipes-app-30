@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import FavoriteRecipeCard from '../components/FavoriteRecipeCard';
-import { getFavoriteRecipesFromLocalStorange, updateLocalStorage }
-from '../helpers/favoriteRecipesLocalStorage';
+// import { getFavoriteRecipesFromLocalStorange, updateLocalStorage }
+// from '../helpers/favoriteRecipesLocalStorage';
 
 // [{
 //   id: id-da-receita,
