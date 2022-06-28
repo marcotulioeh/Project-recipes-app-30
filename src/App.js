@@ -5,7 +5,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './pages/Login';
 import Explore from './pages/Explore';
-import ExploreFoodsOrDrinks from './pages/ExploreFoodsOrDrinks';
+// import ExploreFoodsOrDrinks from './pages/ExploreFoodsOrDrinks';
 import Profile from './pages/Profile';
 import Mainpage from './pages/Mainpage';
 import FoodPage from './pages/FoodPage';
@@ -24,15 +24,15 @@ function App() {
       <Route path="/drinks/:id-da-receita/in-progress" />
       <Route
         path="/explore/foods"
-        render={ (props) => <ExploreFoodsOrDrinks { ...props } /> }
+        component={ Explore }
       />
       <Route
         path="/explore/drinks"
-        render={ (props) => <ExploreFoodsOrDrinks { ...props } /> }
+        component={ Explore }
       />
-      <Route path="/explore/foods/ingredients" />
-      <Route path="/explore/drinks/ingredients" />
-      <Route path="/explore/foods/nationalities" />
+      <Route path="/explore/foods/ingredients" component={ Explore } />
+      <Route path="/explore/drinks/ingredients" component={ Explore } />
+      <Route path="/explore/foods/nationalities" component={ Explore } />
       <Route path="/explore" render={ (props) => <Explore { ...props } /> } />
       <Route path="/profile" />
       <Route path="/profile" component={ Profile } />
