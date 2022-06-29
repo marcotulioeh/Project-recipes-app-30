@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Header from '../components/Header';
 import FavoriteRecipeCard from '../components/FavoriteRecipeCard';
-// import { getFavoriteRecipesFromLocalStorange, updateLocalStorage }
-// from '../helpers/favoriteRecipesLocalStorage';
+import { getFavoriteRecipesFromLocalStorange, removeFavoriteRecipe }
+from '../helpers/favoriteRecipesLocalStorage';
+import RecipeAppContext from '../context/RecipeAppContext';
 
 // [{
 //   id: id-da-receita,
@@ -14,15 +15,53 @@ import FavoriteRecipeCard from '../components/FavoriteRecipeCard';
 //   image: imagem-da-receita
 // }]
 
+const messageCopied = () => (
+  <div>
+    <h3>Link copied!</h3>
+  </div>
+);
+
 const FavoriteRecipes = () => {
+  const { messageCopy: { isOpenMessageCopy } } = useContext(RecipeAppContext);
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
   // const [favoriteFoodsRecipes, setFavoriteFoodsRecipes] = useState([]);
   // const [favoriteDrinksRecipes, setFavoriteDrinksRecipes] = useState([]);
   // const [filter, setFilter] = useState('');
 
-  const removeFavoriteRecipe = (recipeRemoved) => {
+  const onClickremoveFavoriteRecipe = (recipeRemoved) => {
     setFavoriteRecipes(favoriteRecipes.filter((recipe) => recipe !== recipeRemoved));
-    updateLocalStorage(favoriteRecipes);
+    removeFavoriteRecipe(recipeRemoved);
+  };
+
+  // const onClickFavoriteFoodRecipes = () => {
+  //   const favoriteFoodRecipes = getFavoriteRecipesFromLocalStorange()
+  //     .filter((recipe) => recipe.type === 'food');
+  //   setFavoriteRecipes(favoriteFoodRecipes);
+  // };
+
+  // const onClickFavoriteDrinkRecipes = () => {
+  //   const favoriteFoodRecipes = getFavoriteRecipesFromLocalStorange()
+  //     .filter((recipe) => recipe.type === 'food');
+  //   setFavoriteRecipes(favoriteFoodRecipes);
+  // };
+
+  const onClickFilter = (type) => {
+    switch (type) {
+    case 'food':
+      setFavoriteRecipes(getFavoriteRecipesFromLocalStorange()
+        .filter((recipe) => recipe.type === 'food'));
+      break;
+
+    case 'drink':
+      setFavoriteRecipes(getFavoriteRecipesFromLocalStorange()
+        .filter((recipe) => recipe.type === 'drink'));
+      break;
+    case '':
+      setFavoriteRecipes(getFavoriteRecipesFromLocalStorange());
+      break;
+    default:
+      break;
+    }
   };
 
   useEffect(() => {
@@ -32,11 +71,13 @@ const FavoriteRecipes = () => {
   return (
     <>
       <Header title="Favorite Recipes" />
+      { isOpenMessageCopy && messageCopied() }
       <ul>
         <li>
           <button
             type="button"
             data-testid="filter-by-all-btn"
+            onClick={ () => onClickFilter('') }
           >
             All
           </button>
@@ -45,6 +86,7 @@ const FavoriteRecipes = () => {
           <button
             type="button"
             data-testid="filter-by-food-btn"
+            onClick={ () => onClickFilter('food') }
           >
             Food
           </button>
@@ -53,6 +95,7 @@ const FavoriteRecipes = () => {
           <button
             type="button"
             data-testid="filter-by-drink-btn"
+            onClick={ () => onClickFilter('drink') }
           >
             Drinks
           </button>
@@ -64,7 +107,7 @@ const FavoriteRecipes = () => {
             key={ index }
             recipe={ recipe }
             index={ index }
-            onClick={ () => removeFavoriteRecipe(recipe) }
+            onClick={ () => onClickremoveFavoriteRecipe(recipe) }
           />
         ))
       }
