@@ -8,17 +8,19 @@ import Explore from './pages/Explore';
 import ExploreFoodsOrDrinks from './pages/ExploreFoodsOrDrinks';
 import Profile from './pages/Profile';
 import Mainpage from './pages/Mainpage';
+import ProgressPage from './pages/ProgressPage';
 
 function App() {
   return (
     <Switch>
       <Route exact path="/" component={ Login } />
+      <Route path="/in-progress" component={ ProgressPage } />
+      <Route path="/profile" component={ Profile } />
       {/* Rotas abaixo ainda serão implementadas, só um esqueleto */}
       <Route path="/foods" component={ Mainpage } />
       <Route path="/drinks" component={ Mainpage } />
       <Route path="/foods/:id-da-receita" />
       <Route path="/drinks/:id-da-receita" />
-      <Route path="/foods/:id-da-receita/in-progress" />
       <Route path="/drinks/:id-da-receita/in-progress" />
       <Route
         path="/explore/foods"
@@ -33,7 +35,6 @@ function App() {
       <Route path="/explore/foods/nationalities" />
       <Route path="/explore" render={ (props) => <Explore { ...props } /> } />
       <Route path="/profile" />
-      <Route path="/profile" component={ Profile } />
       <Route path="/done-recipes" />
       <Route path="/favorite-recipes" />
     </Switch>
