@@ -1,28 +1,15 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import FavoriteRecipeCard from '../components/FavoriteRecipeCard';
-import { getFavoriteRecipesFromLocalStorange, removeFavoriteRecipe }
-from '../helpers/favoriteRecipesLocalStorage';
-import RecipeAppContext from '../context/RecipeAppContext';
 
-// [{
-//   id: id-da-receita,
-//   type: food-ou-drink,
-//   nationality: nacionalidade-da-receita-ou-texto-vazio,
-//   category: categoria-da-receita-ou-texto-vazio,
-//   alcoholicOrNot: alcoholic-ou-non-alcoholic-ou-texto-vazio,
-//   name: nome-da-receita,
-//   image: imagem-da-receita
-// }]
-
-const messageCopied = () => (
-  <div>
-    <h3>Link copied!</h3>
-  </div>
-);
+// const messageCopied = () => (
+//   <div>
+//     <h3>Link copied!</h3>
+//   </div>
+// );
 
 const FavoriteRecipes = () => {
-  const { messageCopy: { isOpenMessageCopy } } = useContext(RecipeAppContext);
+  // const { messageCopy: { isOpenMessageCopy } } = useContext(RecipeAppContext);
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
   // const [favoriteFoodsRecipes, setFavoriteFoodsRecipes] = useState([]);
   // const [favoriteDrinksRecipes, setFavoriteDrinksRecipes] = useState([]);
@@ -71,7 +58,7 @@ const FavoriteRecipes = () => {
   return (
     <>
       <Header title="Favorite Recipes" />
-      { isOpenMessageCopy && messageCopied() }
+      {/* { isOpenMessageCopy && messageCopied() } */}
       <ul>
         <li>
           <button
