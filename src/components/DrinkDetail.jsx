@@ -100,10 +100,11 @@ function DrinkDetail({ details }) {
       <ol>
         {drinkIngredients.map((ingredient, index) => (
           <li
-            key={ index }
+            key={ `${ingredient}` }
             data-testid={ `${index}-ingredient-name-and-measure` }
           >
-            {`${ingredient[1]} - ${measuresOfIngredients[index][1]}`}
+            {`${ingredient[1]} - ${measuresOfIngredients[index]
+              && measuresOfIngredients[index][1]}`}
 
           </li>
         ))}
