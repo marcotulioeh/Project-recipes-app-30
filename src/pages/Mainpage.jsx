@@ -19,12 +19,12 @@ function Mainpage() {
     },
   } = useContext(RecipeAppContext);
 
-  // jdasijd
   const history = useHistory();
+  const { location: { pathname } } = history;
 
   return (
     <>
-      <Header title="Tela Principal" />
+      <Header title={ pathname === '/foods' ? 'Foods' : 'Drinks' } />
       { mealCategoryFilters.length !== 0 && (
         <section>
           { history.location.pathname === '/foods' && (mealCategoryFilters
