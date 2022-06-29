@@ -8,11 +8,33 @@ import Explore from './pages/Explore';
 // import ExploreFoodsOrDrinks from './pages/ExploreFoodsOrDrinks';
 import Profile from './pages/Profile';
 import Mainpage from './pages/Mainpage';
+import FoodPage from './pages/FoodPage';
+import DrinkPage from './pages/DrinkPage';
 import NotFound from './pages/NotFound';
 
 function App() {
   return (
     <Switch>
+      <Route exact path="/" component={ Login } />
+      {/* Rotas abaixo ainda serão implementadas, só um esqueleto */}
+      <Route path="/foods/:id" component={ FoodPage } />
+      <Route path="/drinks/:id" component={ DrinkPage } />
+      <Route path="/foods" component={ Mainpage } />
+      <Route path="/drinks" component={ Mainpage } />
+      <Route path="/foods/:id-da-receita/in-progress" />
+      <Route path="/drinks/:id-da-receita/in-progress" />
+      <Route
+        path="/explore/foods"
+        component={ Explore }
+      />
+      <Route
+        path="/explore/drinks"
+        component={ Explore }
+      />
+      <Route path="/explore/foods/ingredients" component={ Explore } />
+      <Route path="/explore/drinks/ingredients" component={ Explore } />
+      <Route path="/explore/foods/nationalities" component={ Explore } />
+      <Route path="/explore" render={ (props) => <Explore { ...props } /> } />
       <Route exact path="/explore/drinks/nationalities" component={ NotFound } />
       <Route path="/explore/foods/nationalities" component={ Explore } />
       <Route path="/explore/foods/ingredients" component={ Explore } />
