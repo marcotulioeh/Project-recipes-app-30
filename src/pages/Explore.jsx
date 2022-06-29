@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import determinePageName from '../helpers/determinePageName';
 import BasicExplore from '../components/BasicExplore';
 import ExploreFoodOrDrink from '../components/ExploreFoodOrDrink';
+import ExploreByFilter from '../components/ExploreByFilter';
 
 function Explore() {
   const history = useHistory();
@@ -21,18 +22,25 @@ function Explore() {
       nationality: pathnameDetails[3] === 'nationalities',
     };
     setPageType(pageDetails);
-  }, [pathname]);
+  }, [pathname, history]);
 
   console.log(pageType);
 
   return (
     <>
       <Header title={ Title } />
-      { Title === 'Explore' && <BasicExplore /> }
-      { pageType
-        && (pageType.ingredients === false
-        && pageType.nationality === false
-        && pageType.type) && <ExploreFoodOrDrink type={ pageType.type } /> }
+      {pathname !== '/explore/drinks/nationalities' && (
+        <>
+          { Title === 'Explore' && <BasicExplore /> }
+          { pageType
+          && (pageType.ingredients === false
+          && pageType.nationality === false
+          && pageType.type) && <ExploreFoodOrDrink type={ pageType.type } /> }
+          { pageType && pageType.ingredients && (
+            <ExploreByFilter filterType="ingredients" recipeType={ pageType.type } />) }
+          { pageType && pageType.nationality && (
+            <ExploreByFilter filterType="nationality" recipeType={ pageType.type } />) }
+        </>)}
       <Footer />
     </>
   );
