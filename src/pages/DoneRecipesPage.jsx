@@ -27,6 +27,7 @@ function DoneRecipesPage() {
     setAllowedFood(true);
   };
   useEffect(() => {
+    // doneRecipes vai virar um getItem do doneRecipes do localStorage.
     const doneRecipes = [
       {
         id: '52771',
