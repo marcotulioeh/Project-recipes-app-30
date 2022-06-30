@@ -13,7 +13,6 @@ import FavoriteRecipes from './pages/FavoriteRecipes';
 import FoodPage from './pages/FoodPage';
 import DrinkPage from './pages/DrinkPage';
 import NotFound from './pages/NotFound';
-import FavoriteRecipes from './pages/FavoriteRecipes';
 import DoneRecipes from './pages/DoneRecipes';
 
 function App() {
