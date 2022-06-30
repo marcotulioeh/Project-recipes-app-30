@@ -8,6 +8,7 @@ import Explore from './pages/Explore';
 // import ExploreFoodsOrDrinks from './pages/ExploreFoodsOrDrinks';
 import Profile from './pages/Profile';
 import Mainpage from './pages/Mainpage';
+import FavoriteRecipes from './pages/FavoriteRecipes';
 // import ProgressPage from './pages/ProgressPage';
 import FoodPage from './pages/FoodPage';
 import DrinkPage from './pages/DrinkPage';
@@ -49,6 +50,12 @@ function App() {
       <Route path="/explore/drinks" component={ Explore } />
       <Route path="/explore" component={ Explore } />
       <Route path="/profile" />
+      <Route path="/profile" component={ Profile } />
+      <Route path="/done-recipes" />
+      <Route
+        path="/favorite-recipes"
+        render={ (props) => <FavoriteRecipes { ...props } /> }
+      />
       <Route path="/drinks/:id-da-receita/in-progress" />
       <Route path="/foods/:id-da-receita/in-progress" />
       <Route path="/drinks/:id-da-receita" />

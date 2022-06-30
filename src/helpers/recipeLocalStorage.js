@@ -96,3 +96,14 @@ export function checkFavoriteDrinktem(id) {
     return favoriteDrinkItem[0].id === id;
   }
 }
+
+export function getFavoriteRecipesFromLocalStorange() {
+  const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  return favoriteRecipes;
+}
+
+export function removeFavoriteRecipesFromLocalStorange(recipeRemoved) {
+  const newFavoriteRecipes = getFavoriteRecipesFromLocalStorange()
+    .filter((recipe) => recipe.id !== recipeRemoved.id);
+  localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipes));
+}
