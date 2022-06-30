@@ -20,9 +20,11 @@ function RecipeAppProvider({ children }) {
 
   const RECIPE_CONTEXT = {
     foods: {
+      setFilteredMeals,
       filteredMeals,
     },
     drinks: {
+      setFilteredDrinks,
       filteredDrinks,
     },
     categories: {

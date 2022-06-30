@@ -1,0 +1,20 @@
+.start-button {
+  bottom: 0;
+  position: fixed;
+}
+
+.recommendationSection {
+  display: flex;
+  height: 100px;
+  overflow: auto;
+  width: 360px;
+}
+
+.recommendationCard {
+  margin: 12px;
+  width: 160px;
+}
+
+.recommendationImage {
+  height: 160px;
+}
