@@ -126,3 +126,14 @@ export function favoriteDrinkPageProgress(details) {
   }];
   localStorage.setItem('favoriteDrink', JSON.stringify(favoriteRecipes));
 }
+
+export function getFavoriteRecipesFromLocalStorange() {
+  const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  return favoriteRecipes;
+}
+
+export function removeFavoriteRecipesFromLocalStorange(recipeRemoved) {
+  const newFavoriteRecipes = getFavoriteRecipesFromLocalStorange()
+    .filter((recipe) => recipe.id !== recipeRemoved.id);
+  localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipes));
+}

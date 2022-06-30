@@ -17,6 +17,7 @@ function RecipeAppProvider({ children }) {
   const [drinksByCategory, setDrinksByCategory] = useState([]);
   const [searchFilters, setSearchFilters] = useState({});
   const [searchResult, setSearchResult] = useState({ type: '', recipes: [] });
+  const [isOpenMessageCopy, setIsOpenMessageCopy] = useState(false);
 
   const RECIPE_CONTEXT = {
     foods: {
@@ -42,6 +43,10 @@ function RecipeAppProvider({ children }) {
     a: {
       searchFilters,
       setSearchResult,
+    },
+    messageCopy: {
+      setIsOpenMessageCopy,
+      isOpenMessageCopy,
     },
   };
 
