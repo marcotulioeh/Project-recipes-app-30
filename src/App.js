@@ -12,20 +12,23 @@ import ProgressPage from './pages/ProgressPage';
 import FoodPage from './pages/FoodPage';
 import DrinkPage from './pages/DrinkPage';
 import NotFound from './pages/NotFound';
+import FavoriteRecipes from './pages/FavoriteRecipes';
+import DoneRecipes from './pages/DoneRecipes';
 
 function App() {
   return (
     <Switch>
       <Route exact path="/" component={ Login } />
-      <Route path="/in-progress" component={ ProgressPage } />
       <Route path="/profile" component={ Profile } />
       {/* Rotas abaixo ainda serão implementadas, só um esqueleto */}
+      <Route path="/foods/:id/in-progress" component={ ProgressPage } />
+      <Route path="/drinks/:id/in-progress" component={ ProgressPage } />
       <Route path="/foods/:id" component={ FoodPage } />
       <Route path="/drinks/:id" component={ DrinkPage } />
+      <Route path="/done-recipes" component={ DoneRecipes } />
+      <Route path="/favorite-recipes" component={ FavoriteRecipes } />
       <Route path="/foods" component={ Mainpage } />
       <Route path="/drinks" component={ Mainpage } />
-      <Route path="/foods/:id-da-receita/in-progress" />
-      <Route path="/drinks/:id-da-receita/in-progress" />
       <Route
         path="/explore/foods"
         component={ Explore }
@@ -46,8 +49,6 @@ function App() {
       <Route path="/explore/drinks" component={ Explore } />
       <Route path="/explore" component={ Explore } />
       <Route path="/profile" />
-      <Route path="/done-recipes" />
-      <Route path="/favorite-recipes" />
       <Route path="/drinks/:id-da-receita/in-progress" />
       <Route path="/foods/:id-da-receita/in-progress" />
       <Route path="/drinks/:id-da-receita" />
