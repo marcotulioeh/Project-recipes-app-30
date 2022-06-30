@@ -16,12 +16,17 @@ function Mainpage() {
       drinkCategoryFilters,
     },
     filtering: {
+      currentFilter,
       setCurrentFilter,
     },
   } = useContext(RecipeAppContext);
 
   const history = useHistory();
   const { location: { pathname } } = history;
+
+  const redirectIfOnlyOneRecipe = (recipeId) => {
+    history.push(`${pathname}/${recipeId}`);
+  };
 
   return (
     <>
@@ -54,6 +59,8 @@ function Mainpage() {
       </button>
       { history.location.pathname === '/foods' && (
         <div>
+          { filteredMeals.length === 1 && currentFilter === ''
+            && redirectIfOnlyOneRecipe(filteredMeals[0].idMeal) }
           { filteredMeals.length !== 0 && filteredMeals
             .map(({ strMealThumb, strMeal, idMeal }, index) => (
               <RecipeCard
@@ -65,6 +72,8 @@ function Mainpage() {
       ) }
       { history.location.pathname === '/drinks' && (
         <div>
+          { filteredDrinks.length === 1 && currentFilter === ''
+            && redirectIfOnlyOneRecipe(filteredDrinks[0].idDrink) }
           { filteredDrinks.length !== 0 && filteredDrinks
             .map(({ strDrinkThumb, strDrink, idDrink }, index) => (
               <RecipeCard
