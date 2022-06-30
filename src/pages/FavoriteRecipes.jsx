@@ -93,5 +93,3 @@ const FavoriteRecipes = () => {
     </>
   );
 };
-
-export default FavoriteRecipes;
