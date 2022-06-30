@@ -70,6 +70,10 @@ export function favoriteFoodInLocalStorage(details) {
   localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
 }
 
+export function removeItemlocalStorage(key) {
+  localStorage.removeItem(key);
+}
+
 export function checkFavoriteFoodItem(id) {
   const favoriteFoodItem = JSON.parse(localStorage.getItem('favoriteRecipes'));
   if (favoriteFoodItem) {
@@ -95,4 +99,30 @@ export function checkFavoriteDrinktem(id) {
   if (favoriteDrinkItem) {
     return favoriteDrinkItem[0].id === id;
   }
+}
+
+export function favoriteFoodPageProgress(details) {
+  const favoriteRecipes = [{
+    id: `${details.idMeal}`,
+    type: 'food',
+    nationality: `${details.strArea}`,
+    category: `${details.strCategory}`,
+    alcoholicOrNot: '',
+    name: `${details.strMeal}`,
+    image: `${details.strMealThumb}`,
+  }];
+  localStorage.setItem('favoriteFood', JSON.stringify(favoriteRecipes));
+}
+
+export function favoriteDrinkPageProgress(details) {
+  const favoriteRecipes = [{
+    id: `${details.idDrink}`,
+    type: 'drink',
+    nationality: '',
+    category: `${details.strCategory}`,
+    alcoholicOrNot: `${details.strAlcoholic}`,
+    name: `${details.strDrink}`,
+    image: `${details.strDrinkThumb}`,
+  }];
+  localStorage.setItem('favoriteDrink', JSON.stringify(favoriteRecipes));
 }
