@@ -11,6 +11,7 @@ import Mainpage from './pages/Mainpage';
 import FoodPage from './pages/FoodPage';
 import DrinkPage from './pages/DrinkPage';
 import NotFound from './pages/NotFound';
+import DoneRecipesPage from './pages/DoneRecipesPage';
 
 function App() {
   return (
@@ -44,7 +45,7 @@ function App() {
       <Route path="/explore" component={ Explore } />
       <Route path="/profile" />
       <Route path="/profile" component={ Profile } />
-      <Route path="/done-recipes" />
+      <Route path="/done-recipes" component={ DoneRecipesPage } />
       <Route path="/favorite-recipes" />
       <Route path="/drinks/:id-da-receita/in-progress" />
       <Route path="/foods/:id-da-receita/in-progress" />
