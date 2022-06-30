@@ -5,6 +5,7 @@ import RecipeCard from '../components/RecipeCard';
 import CategoryButton from '../components/CategoryButton';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import SearchButton from '../components/SearchButton';
 
 function Mainpage() {
   const {
@@ -25,6 +26,7 @@ function Mainpage() {
   return (
     <>
       <Header title={ pathname === '/foods' ? 'Foods' : 'Drinks' } />
+      <SearchButton />
       { mealCategoryFilters.length !== 0 && (
         <section>
           { history.location.pathname === '/foods' && (mealCategoryFilters

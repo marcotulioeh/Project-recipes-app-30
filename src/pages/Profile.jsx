@@ -1,9 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 function Profile() {
-  const userEmail = JSON.parse(localStorage.user).email;
+  const emailValidation = () => {
+    const userEmail = JSON.parse(localStorage.getItem('user'));
+    try {
+      if (userEmail === null) {
+        return 'test@test.com';
+      }
+      return userEmail.email;
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
 
   const handleLogout = () => {
     localStorage.clear();
@@ -11,7 +22,8 @@ function Profile() {
 
   return (
     <div>
-      <h3 data-testid="profile-email">{userEmail}</h3>
+      <Header title="Profile" />
+      <h3 data-testid="profile-email">{emailValidation()}</h3>
       <Link to="/done-recipes">
         <button type="button" data-testid="profile-done-btn">Done Recipes</button>
       </Link>

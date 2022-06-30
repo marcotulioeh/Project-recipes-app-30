@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import retrieveRecipeAPIData from '../helpers/RecipesAPI';
 // import RecipeAppContext from '../context/RecipeAppContext';
 import RecipeCard from './RecipeCard';
+import SearchButton from './SearchButton';
 
 function ExploreNationality() {
   const [allNationalities, setAllNationalities] = useState([]);
@@ -49,6 +50,7 @@ function ExploreNationality() {
 
   return (
     <>
+      <SearchButton />
       { allNationalities.length !== 0 && (
         <section>
           <select
