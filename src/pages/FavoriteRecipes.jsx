@@ -1,36 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Header from '../components/Header';
 import FavoriteRecipeCard from '../components/FavoriteRecipeCard';
+import RecipeAppContext from '../context/RecipeAppContext';
+import { getFavoriteRecipesFromLocalStorange,
+  removeFavoriteRecipesFromLocalStorange } from '../helpers/recipeLocalStorage';
 
-// const messageCopied = () => (
-//   <div>
-//     <h3>Link copied!</h3>
-//   </div>
-// );
+const messageCopied = () => (
+  <div>
+    <h3>Link copied!</h3>
+  </div>
+);
 
 const FavoriteRecipes = () => {
-  // const { messageCopy: { isOpenMessageCopy } } = useContext(RecipeAppContext);
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
-  // const [favoriteFoodsRecipes, setFavoriteFoodsRecipes] = useState([]);
-  // const [favoriteDrinksRecipes, setFavoriteDrinksRecipes] = useState([]);
-  // const [filter, setFilter] = useState('');
+  const { messageCopy: { isOpenMessageCopy } } = useContext(RecipeAppContext);
 
   const onClickremoveFavoriteRecipe = (recipeRemoved) => {
     setFavoriteRecipes(favoriteRecipes.filter((recipe) => recipe !== recipeRemoved));
-    removeFavoriteRecipe(recipeRemoved);
+    removeFavoriteRecipesFromLocalStorange(recipeRemoved);
   };
-
-  // const onClickFavoriteFoodRecipes = () => {
-  //   const favoriteFoodRecipes = getFavoriteRecipesFromLocalStorange()
-  //     .filter((recipe) => recipe.type === 'food');
-  //   setFavoriteRecipes(favoriteFoodRecipes);
-  // };
-
-  // const onClickFavoriteDrinkRecipes = () => {
-  //   const favoriteFoodRecipes = getFavoriteRecipesFromLocalStorange()
-  //     .filter((recipe) => recipe.type === 'food');
-  //   setFavoriteRecipes(favoriteFoodRecipes);
-  // };
 
   const onClickFilter = (type) => {
     switch (type) {
@@ -55,10 +43,14 @@ const FavoriteRecipes = () => {
     setFavoriteRecipes(getFavoriteRecipesFromLocalStorange());
   }, []);
 
+  // useEffect(() => {
+  //   console.log('atualizou');
+  // }, [favoriteRecipes]);
+
   return (
     <>
       <Header title="Favorite Recipes" />
-      {/* { isOpenMessageCopy && messageCopied() } */}
+      { isOpenMessageCopy && messageCopied() }
       <ul>
         <li>
           <button
